@@ -7,6 +7,6 @@ from inventario import urls
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', HomeView.as_view(), name='home'),
-    path('inventario',include('inventario.urls', namespace='invetario')),
+    path('inventario/',include('inventario.urls', namespace='inventario')),
 
 ]

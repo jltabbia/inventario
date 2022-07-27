@@ -1,0 +1,40 @@
+{% extends 'layout.html' %}
+{% block titulo %}
+    Crear Producto
+{% endblock %}
+{% block contenido %}
+<div class="container">
+    <div class="card">
+        <div class="card-title">
+            <p class="h3 mb-3 mt-3">Agregar Producto</p>
+        </div>
+        <div class="card-body">
+            <form method="post" action="{% url 'inventario:crear' %}">
+                {% csrf_token %}
+            <div class="input-group input-group-sm mb-3">
+                <span class="input-group-text" id="inputGroup-sizing-sm">Código</span>
+                <input type="text" class="form-control-fixed" size="5" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" nema="codigo">
+              </div>
+              <div class="input-group input-group-sm mb-3">
+                <span class="input-group-text" id="inputGroup-sizing-sm">Detalle</span>
+                <input type="text" class="form-control-fixed" name="detalle" size="100px" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+              </div>
+              <div class="input-group input-group-sm mb-3">
+                <span class="input-group-text" id="inputGroup-sizing-sm">Stock</span>
+                <input type="text" class="form-control-fixed" name="stock" size="'5px" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+              </div>
+              <div class="input-group input-group-sm mb-3">
+                <span class="input-group-text" id="inputGroup-sizing-sm">Stock Mínimo</span>
+                <input type="text" class="form-control-fixed" name="stock_minimo" size="'5px" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+              </div>
+              <div class="input-group input-group-sm mb-3">
+                <span class="input-group-text" id="inputGroup-sizing-sm">Observaciones</span>
+                <input type="text" class="form-control-fixed" name="observaciones" size="100px" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+              </div>
+              <button type="submit" class="btn btn-sm btn-primary">Guardar</button>
+              <a href="{% url 'inventario:home' %}" class="btn btn-sm btn-danger">Cancelar</a>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
