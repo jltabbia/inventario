@@ -4,6 +4,23 @@ Inventario
 {% endblock %}
 {% block contenido %}
     <div class='container'>
-        Inventario
+    <table id='stock' class='table table-stripped table-sm'>
+        <thead class='table-dark'>
+            <th>Código</th>
+            <th>Detalle</th>
+            <th>Stock</th>
+            <th>Stock Mínimo</th>
+            <th>Ultima Compra</th>
+            <th>Observaciones</th>
+            <th>Acciones</th>
+        </thead>
+        <tbody>
+            {% for inve in inventario %}
+            <tr>
+                <td>{{ inve.codigo}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
     </div>
 {% endblock %}

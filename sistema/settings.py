@@ -67,8 +67,12 @@ WSGI_APPLICATION = 'sistema.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'inventario',
+        'HOST': 'localhost',
+        'PORT': '3307',
+        'USER': 'root',
+        'PASSWORD': 'mysqlroot',
     }
 }
 
