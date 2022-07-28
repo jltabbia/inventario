@@ -1,6 +1,6 @@
 <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
-
+  
   {% for campo in formulario %}
    <div class="mb-3">
         <label for="" class="form-label">{{ campo.label }}: </label>
@@ -8,10 +8,11 @@
             type="{{ campo.field.widget.input_type}}" 
             class="form_control" 
             name="{{ campo.name }}" 
-            id="{{ campo.name }}" 
+            id="{{ campo.name }}"
+            value="{{ campo.value | default:'' }}"
             aria-describedby="helpId">
    </div>
    <div class='col-12 help-text'> {{ campo.errors}}</div>
-  {% endfor %}
-   <input name="" id="" class="btn btn-primary" type="submit" value="Guardar">
+  {% endfor %} 
+   <input class="btn btn-primary" type="submit" value="Guardar">
 </form>

@@ -11,12 +11,13 @@ class InventarioHomeView(View):
         inventario=Inventario.objects.all()
         return render(request, 'inventario/index.html', {"inventario":inventario})
     
-class crearView(View):
-    def get(self, request, *args, **kwargs):
-        formulario=InventarioForm(request.POST or None)
-   
+def crear(request):
+        formulario=InventarioForm(request.POST or None)  
+        if formulario.is_valid():
+            formulario.save()
+            return redirect('inventario:home')
         return render(request,'inventario/crear.html',{'formulario':formulario})   
-        
+
 def eliminar(request, id):
     producto=Inventario.objects.get(id=id)
     producto.delete()
@@ -24,4 +25,6 @@ def eliminar(request, id):
     return redirect('inventario:home')
 
 def editar(request, id):
-    return render(request, 'inventario/editar.html',{})  
+    inventario=Inventario.objects.get(id=id) 
+    formulario=InventarioForm(request.POST or None, instance=inventario)
+    return render(request, 'inventario/editar.html',{'formulario':formulario})  
