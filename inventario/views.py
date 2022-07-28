@@ -27,4 +27,8 @@ def eliminar(request, id):
 def editar(request, id):
     inventario=Inventario.objects.get(id=id) 
     formulario=InventarioForm(request.POST or None, instance=inventario)
+    if formulario.is_valid():
+        formulario.save()
+        return redirect('inventario:home')
+    
     return render(request, 'inventario/editar.html',{'formulario':formulario})  

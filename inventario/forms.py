@@ -4,4 +4,4 @@ from .models import Inventario
 class InventarioForm(forms.ModelForm):
     class Meta:
         model = Inventario
-        fields = '__all__'
+        fields = ['codigo', 'detalle', 'stock', 'stock_minimo', 'ultima_compra', 'observaciones']

@@ -1,9 +1,12 @@
+
 {% extends 'layout.html' %}
 {% block titulo %}
     Inventario - Inicio
 {% endblock %}
 {% block contenido %}
-<div class='container'>
-<p class="h2 mt-3 mnb-3">Página Inicio</p>
+<div class='container text-center'>
+{% load static %}
+<p class="h2 mt-3 mnb-3">Sistema de Control de Invetario</p>
+<img src="{% static 'imagenes/almacen.jpg' %}">
 </div>
 {% endblock %}
