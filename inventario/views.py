@@ -2,6 +2,7 @@ import re
 from django.shortcuts import render, redirect
 from django.views.generic import View
 from .models import Inventario
+from .forms import InventarioForm
 
 # Create your views here.
 
@@ -10,21 +11,17 @@ class InventarioHomeView(View):
         inventario=Inventario.objects.all()
         return render(request, 'inventario/index.html', {"inventario":inventario})
     
-class InventarioCrearView(View):
+class crearView(View):
     def get(self, request, *args, **kwargs):
-        return render(request,'inventario/crear.html',{})
-    
-    def post(self, request, *args, **kwargs):
-        if request.method=='POST':
-            producto=Inventario.new()
-            producto.codigo=request.get('codigo')
-            producto.save()
-            
-            return redirect('inventario:home')        
+        formulario=InventarioForm(request.POST or None)
+   
+        return render(request,'inventario/crear.html',{'formulario':formulario})   
         
 def eliminar(request, id):
     producto=Inventario.objects.get(id=id)
     producto.delete()
     
     return redirect('inventario:home')
-    
+
+def editar(request, id):
+    return render(request, 'inventario/editar.html',{})  

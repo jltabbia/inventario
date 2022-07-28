@@ -1,15 +1,14 @@
 from email.policy import default
 from django.db import models
-from django.forms import CharField, DateField, IntegerField
 
 # Create your models here.
 
 class Inventario(models.Model):
-    codigo=models.IntegerField()
+    codigo=models.CharField(max_length=6, null=False)
     detalle=models.CharField(max_length=150, null=False)
     stock=models.IntegerField(default='0')
     stock_minimo=models.IntegerField(default='0')
-    ultima_compra=models.DateField(null=True)
+    ultima_compra=models.DateTimeField(null=True)
     observaciones=models.CharField(max_length=150, null=True)
 
 
