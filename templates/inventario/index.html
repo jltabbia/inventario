@@ -4,7 +4,11 @@ Inventario
 {% endblock %}
 {% block contenido %}
     <div class='container'>
+    <div class='card'>
+        <div class='card-header text-center' style="background:mediumturquoise">
         <p class="h2 mb-3">Listado de Inventario</p>
+        </div>
+        <div class="card-body">
         <a href="{% url 'inventario:crear' %} " class="btn btn-sm btn-primary mb-3 mt-3">Crear Producto</a>
     
     <table id='stock' class='table table-stripped table-sm'>
@@ -34,6 +38,8 @@ Inventario
             {% endfor %}
         </tbody>
     </table>
-
+</div>
+</div>
     </div>
+
 {% endblock %}
