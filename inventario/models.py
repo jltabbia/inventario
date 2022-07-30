@@ -11,9 +11,3 @@ class Inventario(models.Model):
     ultima_compra=models.DateField(null=True, verbose_name="Ultima Compra",blank=True)
     observaciones=models.CharField(max_length=150, null=True, verbose_name="Observaciones",default="",blank=True)
 
-
-class Clientes(models.Model):
-    cuil=models.CharField(max_length=15, null=False)
-    nombre=models.CharField(max_length=100, null=False)
-    direccion=models.CharField(max_length=150)
-    fecha_alta=models.DateField(auto_now=True,verbose_name="Fecha de Alta")
