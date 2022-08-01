@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     'ventas',
     'clientes',
     'proveedores',
+    'fontawesome_5',
 ]
 
 MIDDLEWARE = [
