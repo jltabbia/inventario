@@ -22,7 +22,10 @@
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="{% url 'inventario:home' %}">Inventario</a>
+                <a class="nav-link" aria-current="page" href="{% url 'inventario:home' %}">Inventario</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link"  aria-current="page" href="{% url 'clientes:home' %}">Clientes</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="#">Ventas</a>
@@ -30,9 +33,7 @@
               <li class="nav-item">
                 <a class="nav-link" href="#">Proveedores</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Clientes</a>
-              </li>
+          
               <li class="nav-item">
                 <a class="nav-link" href="#">Bancos</a>
               </li>
@@ -52,11 +53,12 @@
           </div>
         </div>
       </nav>
+      <div class="container">
     {% block contenido %}
 
     {% endblock %}
-    
-    
+    <p class"h4 mt-3 mb-3">Copyright <i class="fa-solid fa-copyright"></i> 2022 - <a target="_blank"  href="https://jt-tgroup.ar" >JT & T Group</a>
+    </div>
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>

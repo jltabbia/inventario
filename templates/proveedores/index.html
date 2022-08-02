@@ -1,0 +1,52 @@
+{% extends 'layout.html' %}
+{% block titulo%}
+Inventario
+{% endblock %}
+{% block contenido %}
+    <div class='container'>
+    <div class='card'>
+        <div class='card-header text-center' style="background:mediumturquoise">
+        <p class="h2 mb-3">Listado de Inventario</p>
+        </div>
+        <div class="card-body">
+        <a href="{% url 'inventario:crear' %} " class="btn btn-sm btn-primary mb-3 mt-3"><i class="fa-solid fa-file-circle-plus"></i> Crear Producto</a>
+    
+    <table id='inventario' class='table table-stripped table-sm'>
+        <thead class='table-dark'>
+            <th>Código</th>
+            <th>Detalle</th>
+            <th>Stock</th>
+            <th>Stock Mínimo</th>
+            <th>Ultima Compra</th>
+            <th>Observaciones</th>
+            <th>Acciones</th>
+        </thead>
+        <tbody>
+            {% for i in inventario %}
+            <tr>
+                <td>{{ i.codigo}}</td>
+                <td>{{ i.detalle}}</td>
+                <td>{{ i.stock}}</td>
+                <td>{{ i.stock_minimo}}</td>
+                <td>{{ i.ultima_compra}}</td>
+                <td>{{ i.observaciones}}</td>
+                <td>
+                    <a href="editar/{{ i.id }}" class='btn btn-sm btn-success'><i class="fa-solid fa-pencil"></i> Editar</a>
+                    <a href="eliminar/{{ i.id }}" class='btn btn-sm btn-danger'><i class="fa-solid fa-trash-alt"></i> Eliminar</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+</div>
+    </div>
+
+{% endblock %}
+{% block scripts %}
+<script>
+$(document).ready(function () {
+    $('#inventario').DataTable();
+});
+</script>
+{% endblock %}
