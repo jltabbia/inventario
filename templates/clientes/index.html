@@ -6,12 +6,12 @@ Inventario
     <div class='container'>
     <div class='card'>
         <div class='card-header text-center' style="background:mediumturquoise">
-        <p class="h2 mb-3">Listado de Inventario</p>
+        <p class="h2 mb-3">Listado de Clientes</p>
         </div>
         <div class="card-body">
         <a href="{% url 'inventario:crear' %} " class="btn btn-sm btn-primary mb-3 mt-3"><i class="fa-solid fa-file-circle-plus"></i> Crear Producto</a>
     
-    <table id='inventario' class='table table-stripped table-sm'>
+    <table id='stock' class='table table-stripped table-sm'>
         <thead class='table-dark'>
             <th>Código</th>
             <th>Detalle</th>
@@ -42,11 +42,4 @@ Inventario
 </div>
     </div>
 
-{% endblock %}
-{% block scripts %}
-<script>
-$(document).ready(function () {
-    $('#inventario').DataTable();
-});
-</script>
 {% endblock %}
