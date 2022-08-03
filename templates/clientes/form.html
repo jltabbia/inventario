@@ -13,5 +13,6 @@
    </div>
    <div class='col-12 help-text'> {{ campo.errors}}</div>
   {% endfor %} 
-  <input class="btn btn-primary" type="submit" value="Guardar">
+  <input class="btn btn-primary btn-sm" type="submit" value="Guardar">
+  <a href="{% url 'clientes:home' %}" class='btn btn-sm btn-danger'>Cancelar</a>
 </form>
