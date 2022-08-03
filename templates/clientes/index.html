@@ -11,7 +11,7 @@ Clientes
         <div class="card-body">
         <a href="{% url 'clientes:crear' %} " class="btn btn-sm btn-primary mb-3 mt-3"><i class="fa-solid fa-file-circle-plus"></i> Crear Cliente</a>
     
-    <table id='stock' class='table table-stripped table-sm'>
+    <table id='cliente' class='table table-stripped table-sm'>
         <thead class='table-dark'>
             <th>CUIT/CUIL</th>
             <th>Nombre</th>
@@ -44,4 +44,11 @@ Clientes
 </div>
     </div>
 
+{% endblock %}
+{% block scripts %}
+<script>
+$(document).ready(function () {
+    $('#cliente').DataTable();
+});
+</script>
 {% endblock %}
