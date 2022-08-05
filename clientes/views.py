@@ -2,6 +2,7 @@ from asyncio.windows_events import NULL
 import re
 from django.shortcuts import render, redirect
 from django.views.generic import View
+from django.http import JsonResponse
 from .models import Clientes
 from .forms import ClienteForm
 from general.models import Provincias, Localidades
@@ -64,5 +65,7 @@ def editar(request, id):
     return render(request, 'clientes/editar.html',context)  
 
 def buscarLoc(request, id):
-    localidades=Localidades.get(id)
+    is_ajax = request.headers.get('X-Requested-With') == 'XMLHttpRequest'
+    localidades=list(Localidades.get(id).values)
     print(localidades)
+    return JsonResponse({'localidades',localidades})
