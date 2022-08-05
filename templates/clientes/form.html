@@ -2,15 +2,15 @@
     {% csrf_token %}
       <div class="form-group">
           <label for="cuil">Cuil/Cuit</label>
-          <input id="cuil" class="form-control" type="text" name="cuil">
+          <input id="cuil" class="form-control" type="text" name="cuil" value="{{ cliente.cuil }}">
       </div>
       <div class="form-group">
           <label for="nombre">Nombre</label>
-          <input id="nombre" class="form-control" type="text" name="nombre" placeholder="Nombre o Razón Social">
+          <input id="nombre" class="form-control" type="text" name="nombre" value="{{ cliente.nombre }}" placeholder="Nombre o Razón Social">
       </div>
       <div class="form-group">
           <label for="direccion">Domicilio</label>
-          <input id="direccion" class="form-control" type="text" name="direccion">
+          <input id="direccion" class="form-control" type="text" name="direccion" value="{{ cliente.direccion }}">
       </div>
     <div class="form-group">
       <label for="prov">Provincia</label>
@@ -28,7 +28,7 @@
     </div>
     <div class="form-group">
       <label for="fecha_alta">Fecha Alta</label>
-      <input id="fecha_alta" class="form-control" type="date" name="fecha_alta">
+      <input id="fecha_alta" class="form-control" type="date" name="fecha_alta" value="{{ cliente.fecha_alta }}">
   </div>
     
   {% comment %} 

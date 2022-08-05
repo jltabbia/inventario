@@ -41,13 +41,27 @@ def eliminar(request, id):
     return redirect('clientes:home')
 
 def editar(request, id):
+    provincias=Provincias.objects.all()
     cliente=Clientes.objects.get(id=id) 
-    formulario=ClienteForm(request.POST or None, instance=cliente)
-    if formulario.is_valid():
-        formulario.save()
+    if request.method=="POST":
+        cliente.cuil=request.POST.get('cuil')
+        cliente.nombre=request.POST.get('nombre')
+        cliente.direccion=request.POST.get('direccion')
+        cliente.provincia=request.POST.get('provincia')
+        if request.POST.get('localidad') == NULL:
+            cliente.localidad=24
+        else:
+            cliente.localidad=request.POST.get('localidad')
+        cliente.fecha_alta=request.POST.get('fecha_alta')
+        print(cliente.cuil)
+        cliente.save()
         return redirect('clientes:home')
-    
-    return render(request, 'clientes/editar.html',{'formulario':formulario})  
+
+    context = {
+        'cliente':cliente,
+        'provincias':provincias,
+    }
+    return render(request, 'clientes/editar.html',context)  
 
 def buscarLoc(request, id):
     localidades=Localidades.get(id)
