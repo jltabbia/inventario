@@ -19,7 +19,7 @@
 {% block scripts %}
 <script>
 $(document).ready(function() {
-    alert('Anda...');
+
     function getCookie(name) {
         let cookieValue = null;
         if (document.cookie && document.cookie !== "") {
@@ -39,23 +39,14 @@ $(document).ready(function() {
         var provincia=$("#prov").val();
         
         alert(provincia);
-        var url = 'clientes:buscarloc/'+provincia;
+        var url = '/clientes/buscarloc?id='+provincia;
         $.ajax({
             url: url,
-            type: "GET",
+            //type: "post",
             dataType: "json",
-            credentials: true,
-            crossDomain:true,
-            headers: {
-              "X-Requested-With": "XMLHttpRequest",
-              "X-CSRFToken": getCookie("csrftoken"),
+            success: function(response) {
+              console.log(response);
             },
-            success: (data) => {
-              console.log(data);
-            },
-            error: (error) => {
-              console.log(error);
-            }
           });
     });
 });

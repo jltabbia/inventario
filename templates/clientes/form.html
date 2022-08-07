@@ -16,7 +16,7 @@
       <label for="prov">Provincia</label>
       <select id="prov" class="form-control" name="provincia">
           {% for p in provincias %}
-          <option value="{{ p.codigo }}">{{ p.nombre }}</option>
+          <option value="{{ p.id }}">{{ p.nombre }}</option>
           {% endfor %}
       </select>
     </div>
