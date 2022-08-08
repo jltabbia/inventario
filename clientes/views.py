@@ -1,8 +1,7 @@
-import re
 from threading import local
 from django.shortcuts import render, redirect
-from django.views.generic import View,ListView
-from django.http import JsonResponse, HttpResponse
+from django.views.generic import View
+from django.http import JsonResponse
 from .models import Clientes
 from general.models import Provincias, Localidades
 
@@ -76,12 +75,4 @@ def editar(request, id):
         'localidad':localidad,
     }
     return render(request, 'clientes/editar.html',context)  
-
-def BuscarLoc(request):
-    def get(self, request,*args, **kwargs):
-        id=request.GET.get('id')
-        localidades=list(Localidades.objects.filter(codigo_provincia=id).values)
-        print(id)
-        return JsonResponse(localidades)
-    
 

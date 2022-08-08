@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import CrearView, BuscarLoc, eliminar, editar, ClienteHomeView, ListaLocalidades
+from .views import CrearView,eliminar, editar, ClienteHomeView, ListaLocalidades
 
 app_name='clientes'
 
