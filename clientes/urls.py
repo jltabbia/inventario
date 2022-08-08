@@ -9,6 +9,6 @@ urlpatterns = [
     # path('crear/',crear,name='crear'),
     path('eliminar/<int:id>', eliminar),
     path('editar/<int:id>',editar),
-    path('ListaLocalidades',ListaLocalidades.as_view(),name='listalocalidades'),
+    path('ListaLocalidades/<int:id>',ListaLocalidades),
 
 ]

@@ -19,38 +19,30 @@
 {% block scripts %}
 <script>
 $(document).ready(function() {
-
-    function getCookie(name) {
-        let cookieValue = null;
-        if (document.cookie && document.cookie !== "") {
-          const cookies = document.cookie.split(";");
-          for (let i = 0; i < cookies.length; i++) {
-            const cookie = cookies[i].trim();
-            // Does this cookie string begin with the name we want?
-            if (cookie.substring(0, name.length + 1) === (name + "=")) {
-              cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-              break;
-            }
-          }
-        }
-        return cookieValue;
-      }
+  var provincia=$("#prov").val();
+  buscar(provincia);
     $("#prov").change(function(){
         var provincia=$("#prov").val();
-        
-        alert(provincia);
-        var url = '/clientes/listalocalidades';
-        $.ajax({
-            url: url,
-            type: "get",
-            data:{'id':provincia},
-            dataType: "json",
-            success: function(response) {
-              console.log(response);
-            },
-          });
+        buscar(provincia);
     });
+  
 });
+function buscar(pro){
+  var url = '/clientes/ListaLocalidades/'+pro;
+  $.ajax({
+      url: url,
+      type: "get",
+      dataType: "json",
+      success: function(response) {
+        console.log(response);
+        $("#loca").empty();
+        for (var key in response.localidades) {
+          var temp="<option value='"+response.localidades[key].id+"'>"+response.localidades[key].detalle+"</option>";
+          $("#loca").append(temp);
+        }
+      },
+    });
+};
 </script>
 {% endblock %}
 

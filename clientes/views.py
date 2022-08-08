@@ -35,24 +35,18 @@ class CrearView(View):
         cliente.save()
         return redirect('clientes:home')
             
-class ListaLocalidades(ListView):
-    model: Localidades
-    
-    def get_queryset(self):
-        return self.model.objects.filter(codigo_provincia=id)
-    
-    def get(self,request,*args, **kwargs):
-        id=request.GET.get('id')
-        lista_localidades=[]
-        for localidad in self.get_queryset():
-            localidades={}
-            localidades['id']=localidad.id 
-            localidades['detalle']=localidad.nombre_localidad
-            lista_localidades.append(localidades)
-            print(lista_localidades)
+def ListaLocalidades(request, id):
 
+    loca=Localidades.objects.filter(codigo_provincia=id)
+    lista_localidades=[]
+    for localidad in loca:
+        localidades={}
+        localidades['id']=localidad.id 
+        localidades['codigo_provincia']=localidad.codigo_provincia
+        localidades['detalle']=localidad.nombre_localidad
+        lista_localidades.append(localidades)
 
-
+    return JsonResponse({"localidades":lista_localidades})
 
 def eliminar(request, id):
     cliente=Clientes.objects.get(id=id)
