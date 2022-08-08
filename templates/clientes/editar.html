@@ -10,6 +10,8 @@
         </div>
         <div class="card-body" style="background:bisque;">
             <h4 class="card-title">Datos del Cliente</h4>
+            <input type='text' id='pro' value='{{ cliente.provincia }}'>
+            <input type='text' id='loc' value='{{ cliente.localidad }}'>
             {% include "clientes/form.html" %}
         </div>
     </div>
@@ -18,7 +20,31 @@
 {% block scripts %}
 <script>
 $(document).ready(function() {
-    alert('Anda...');
+    
+    var p=pro.value;
+    var l=loc.value;
+    $("#prov option[value="+p+"]").attr("selected",true);
+    alert(p);
+    buscar(p,l);
+    
+
+    function buscar(p,l){
+        var url = '/clientes/ListaLocalidades/'+p;
+        $.ajax({
+            url: url,
+            type: "get",
+            dataType: "json",
+            success: function(response) {
+              console.log(response);
+              $("#loca").empty();
+              for (var key in response.localidades) {
+                var temp="<option value='"+response.localidades[key].codigo_localidad+"'>"+response.localidades[key].detalle+"</option>";
+                $("#loca").append(temp);
+              }
+              $("#loca option[value="+l+"]").attr("selected",true);
+            },
+          });
+      };
 });
 </script>
 {% endblock %}

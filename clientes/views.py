@@ -4,13 +4,31 @@ from django.views.generic import View
 from django.http import JsonResponse
 from .models import Clientes
 from general.models import Provincias, Localidades
+from datetime import datetime, timedelta
 
 # Create your views here.
 
 class ClienteHomeView(View):
     def get(self, request,*args, **kwargs):
         clientes=Clientes.objects.all()
-        return render(request, 'clientes/index.html', {"clientes":clientes})
+        cliente=[]
+        for c in clientes:
+            pro=Provincias.objects.get(id=c.provincia)
+            print(pro)
+            loc=Localidades.objects.get(codigo_provincia=c.provincia, codigo_localidad=c.localidad)
+            cli={}
+            cli['id']=c.id
+            cli['cuil']=c.cuil
+            cli['nombre']=c.nombre 
+            cli['direccion']=c.direccion 
+            cli['provincia']=pro.nombre
+            cli['localidad']=loc.nombre_localidad
+            cli['fecha_alta']=c.fecha_alta
+            cliente.append(cli)
+        context={
+            'clientes':cliente,
+            }
+        return render(request, 'clientes/index.html', context)
     
 class CrearView(View):
     def get(self,request,*args, **kwargs):
@@ -39,6 +57,7 @@ def ListaLocalidades(request, id):
     for localidad in loca:
         localidades={}
         localidades['id']=localidad.id 
+        localidades['codigo_localidad']=localidad.codigo_localidad
         localidades['codigo_provincia']=localidad.codigo_provincia
         localidades['detalle']=localidad.nombre_localidad
         lista_localidades.append(localidades)
@@ -54,10 +73,8 @@ def eliminar(request, id):
 def editar(request, id):
     
     cliente=Clientes.objects.get(id=id) 
-    provincia=Provincias.objects.filter(id=cliente.provincia) 
-    localidad=Localidades.objects.filter(codigo_provincia=cliente.provincia, codigo_localidad=cliente.localidad)   
-    print(provincia)
-    print(localidad)
+    provincia=Provincias.objects.all() 
+    print(datetime.strptime(cliente.fecha_alta, "%d-%m-%Y"))
     if request.method=="POST":
         cliente.cuil=request.POST.get('cuil')
         cliente.nombre=request.POST.get('nombre')
@@ -65,14 +82,13 @@ def editar(request, id):
         cliente.provincia=request.POST.get('provincia')
         cliente.localidad=request.POST.get('localidad')
         cliente.fecha_alta=request.POST.get('fecha_alta')
-        print(cliente.cuil)
+       
         cliente.save()
         return redirect('clientes:home')
 
     context = {
         'cliente':cliente,
         'provincia':provincia,
-        'localidad':localidad,
     }
     return render(request, 'clientes/editar.html',context)  
 

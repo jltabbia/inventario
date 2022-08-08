@@ -37,7 +37,7 @@ function buscar(pro){
         console.log(response);
         $("#loca").empty();
         for (var key in response.localidades) {
-          var temp="<option value='"+response.localidades[key].id+"'>"+response.localidades[key].detalle+"</option>";
+          var temp="<option value='"+response.localidades[key].codigo_localidad+"'>"+response.localidades[key].detalle+"</option>";
           $("#loca").append(temp);
         }
       },
