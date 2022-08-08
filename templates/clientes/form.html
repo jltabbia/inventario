@@ -15,7 +15,7 @@
     <div class="form-group">
       <label for="prov">Provincia</label>
       <select id="prov" class="form-control" name="provincia">
-          {% for p in provincias %}
+          {% for p in provincia %}
           <option value="{{ p.id }}">{{ p.nombre }}</option>
           {% endfor %}
       </select>
@@ -23,6 +23,9 @@
     <div class="form-group">
       <label for="loca">Localidad</label>
       <select id="loca" class="form-control" name="localidad">
+        {% for l in localidad %}
+          <option value="{{ l.id }}">{{ l.nombre_localidad }}</option>
+          {% endfor %}
       </select>        
     </div>
     <div class="form-group">

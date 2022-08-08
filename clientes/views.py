@@ -1,4 +1,5 @@
 import re
+from threading import local
 from django.shortcuts import render, redirect
 from django.views.generic import View,ListView
 from django.http import JsonResponse, HttpResponse
@@ -14,9 +15,9 @@ class ClienteHomeView(View):
     
 class CrearView(View):
     def get(self,request,*args, **kwargs):
-        provincias=Provincias.objects.all()
+        provincia=Provincias.objects.all()
         context={
-        'provincias':provincias,
+        'provincia':provincia,
         }
         return render(request,'clientes/crear.html',context)   
 
@@ -26,10 +27,7 @@ class CrearView(View):
         cliente.nombre=request.POST.get('nombre')
         cliente.direccion=request.POST.get('direccion')
         cliente.provincia=request.POST.get('provincia')
-        if request.POST.get('localidad') == '':
-            cliente.localidad=24
-        else:
-            cliente.localidad=request.POST.get('localidad')
+        cliente.localidad=request.POST.get('localidad')
         cliente.fecha_alta=request.POST.get('fecha_alta')
         print(cliente.cuil)
         cliente.save()
@@ -55,17 +53,18 @@ def eliminar(request, id):
     return redirect('clientes:home')
 
 def editar(request, id):
-    provincias=Provincias.objects.all()
+    
     cliente=Clientes.objects.get(id=id) 
+    provincia=Provincias.objects.filter(id=cliente.provincia) 
+    localidad=Localidades.objects.filter(codigo_provincia=cliente.provincia, codigo_localidad=cliente.localidad)   
+    print(provincia)
+    print(localidad)
     if request.method=="POST":
         cliente.cuil=request.POST.get('cuil')
         cliente.nombre=request.POST.get('nombre')
         cliente.direccion=request.POST.get('direccion')
         cliente.provincia=request.POST.get('provincia')
-        if request.POST.get('localidad') == NULL:
-            cliente.localidad=24
-        else:
-            cliente.localidad=request.POST.get('localidad')
+        cliente.localidad=request.POST.get('localidad')
         cliente.fecha_alta=request.POST.get('fecha_alta')
         print(cliente.cuil)
         cliente.save()
@@ -73,7 +72,8 @@ def editar(request, id):
 
     context = {
         'cliente':cliente,
-        'provincias':provincias,
+        'provincia':provincia,
+        'localidad':localidad,
     }
     return render(request, 'clientes/editar.html',context)  
 
