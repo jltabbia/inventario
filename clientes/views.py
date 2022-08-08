@@ -1,6 +1,6 @@
 import re
 from django.shortcuts import render, redirect
-from django.views.generic import View
+from django.views.generic import View,ListView
 from django.http import JsonResponse, HttpResponse
 from .models import Clientes
 from general.models import Provincias, Localidades
@@ -26,7 +26,7 @@ class CrearView(View):
         cliente.nombre=request.POST.get('nombre')
         cliente.direccion=request.POST.get('direccion')
         cliente.provincia=request.POST.get('provincia')
-        if request.POST.get('localidad') == NULL:
+        if request.POST.get('localidad') == '':
             cliente.localidad=24
         else:
             cliente.localidad=request.POST.get('localidad')
@@ -35,7 +35,25 @@ class CrearView(View):
         cliente.save()
         return redirect('clientes:home')
             
+class ListaLocalidades(ListView):
+    model: Localidades
     
+    def get_queryset(self):
+        return self.model.objects.filter(codigo_provincia=id)
+    
+    def get(self,request,*args, **kwargs):
+        id=request.GET.get('id')
+        lista_localidades=[]
+        for localidad in self.get_queryset():
+            localidades={}
+            localidades['id']=localidad.id 
+            localidades['detalle']=localidad.nombre_localidad
+            lista_localidades.append(localidades)
+            print(lista_localidades)
+
+
+
+
 def eliminar(request, id):
     cliente=Clientes.objects.get(id=id)
     cliente.delete()

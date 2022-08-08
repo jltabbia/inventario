@@ -39,10 +39,11 @@ $(document).ready(function() {
         var provincia=$("#prov").val();
         
         alert(provincia);
-        var url = '/clientes/buscarloc?id='+provincia;
+        var url = '/clientes/listalocalidades';
         $.ajax({
             url: url,
-            //type: "post",
+            type: "get",
+            data:{'id':provincia},
             dataType: "json",
             success: function(response) {
               console.log(response);

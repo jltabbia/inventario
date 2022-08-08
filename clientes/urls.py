@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import CrearView, BuscarLoc, eliminar, editar, ClienteHomeView
+from .views import CrearView, BuscarLoc, eliminar, editar, ClienteHomeView, ListaLocalidades
 
 app_name='clientes'
 
@@ -9,6 +9,6 @@ urlpatterns = [
     # path('crear/',crear,name='crear'),
     path('eliminar/<int:id>', eliminar),
     path('editar/<int:id>',editar),
-    path('buscarloc',BuscarLoc),
+    path('ListaLocalidades',ListaLocalidades.as_view(),name='listalocalidades'),
 
 ]
