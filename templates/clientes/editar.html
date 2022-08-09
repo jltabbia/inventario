@@ -10,9 +10,8 @@
         </div>
         <div class="card-body" style="background:bisque;">
             <h4 class="card-title">Datos del Cliente</h4>
-            <input type='text' id='pro' value='{{ cliente.provincia }}'>
-            <input type='text' id='loc' value='{{ cliente.localidad }}'>
-            <input type='text' id='fa' value='{{ cliente.fecha_alta }}'>
+            <input type='hidden' id='pro' value='{{ cliente.provincia }}'>
+            <input type='hidden' id='loc' value='{{ cliente.localidad }}'>
             {% include "clientes/form.html" %}
         </div>
     </div>
@@ -24,13 +23,12 @@ $(document).ready(function() {
     
     var p=pro.value;
     var l=loc.value;
-    var f=fa.value;
+   
     // var f1 = toDate(fa.value);
     $("#prov option[value="+p+"]").attr("selected",true);
-    alert(f);
+
     buscar(p,l);
-    $("#fecha_alta").val(f);
-    
+
     function buscar(p,l){
         var url = '/clientes/ListaLocalidades/'+p;
         $.ajax({

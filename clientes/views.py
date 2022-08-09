@@ -1,4 +1,3 @@
-from xmlrpc.client import _datetime_type
 from django.shortcuts import render, redirect
 from django.views.generic import View
 from django.http import JsonResponse
@@ -75,26 +74,16 @@ def editar(request, id):
     cliente=Clientes.objects.get(id=id) 
     provincia=Provincias.objects.all() 
     
-    fecha=cliente.fecha_alta
+    fecha=date.fromisoformat(str(cliente.fecha_alta))
     #f=datetime.strftime(fecha, "%Y-%m-%d")
-    df=pd.DataFrame({'f':[fecha]})
-    df["f"].dt.strftime("%Y-%m-%d")
-    
-    df['f']=pd.to_datetime(df["f"])
-    a=df['f'].dt.year
-    print(a)
-    m=df['f'].dt.month
-    print(m)
-    d=df['f'].dt.day
-    print(d)
-    print(str(a)+"-"+str(m)+"-"+str(d))
+
     if request.method=="POST":
         cliente.cuil=request.POST.get('cuil')
         cliente.nombre=request.POST.get('nombre')
         cliente.direccion=request.POST.get('direccion')
         cliente.provincia=request.POST.get('provincia')
         cliente.localidad=request.POST.get('localidad')
-        cliente.fecha_alta=a+"-"+m+"-"+d
+        cliente.fecha_alta=request.POST.get('fecha_alta')
        
         cliente.save()
         return redirect('clientes:home')
@@ -102,7 +91,7 @@ def editar(request, id):
     context = {
         'cliente':cliente,
         'provincia':provincia,
-        'fecha_alta':str(a)+"-"+str(m)+"-"+str(d),
+        'fecha_alta':fecha,
     }
     return render(request, 'clientes/editar.html',context)  
 
