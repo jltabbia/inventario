@@ -1,4 +1,4 @@
-<form method="post" enctype="multipart/form-data">
+{% comment %} <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
   
   {% for campo in formulario %}
@@ -15,4 +15,37 @@
   {% endfor %} 
   <input class="btn btn-primary btn-sm" type="submit" value="Guardar">
   <a href="{% url 'inventario:home' %}" class='btn btn-sm btn-danger'>Cancelar</a>
+</form>
+ {% endcomment %}
+<form method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+    <div class="form-group">
+        <label for="codigo">Código</label>
+        <input id="codigo" class="form-control" type="text" name="codigo" value="{{ inventario.codigo }}">
+    </div>
+    <div class="form-group">
+        <label for="detalle">Detalle</label>
+        <input id="detalle" class="form-control" type="text" name="detalle" value="{{ inventario.detalle }}" placeholder="Detalle del producto">
+    </div>
+    <div class="form-group">
+        <label for="stock">Stock</label>
+        <input id="stock" class="form-control" type="text" name="stock" value="{{ inventario.stock }}">
+    </div>
+    <div class="form-group">
+    <div class="form-group">
+        <label for="stock_minimo">Stock Mínimo</label>
+        <input id="stock_minimo" class="form-control" type="text" name="stock_minimo" value="{{ inventario.stock_minimo }}">
+    </div>
+    <div class="form-group">
+    <label for="ultima_compra">Fecha Ultima Compra</label>
+    <input id="ultima_compra" class="form-control" type="date" name="ultima_compra" value="{{ ultima_compra }}">
+</div>
+<div class="form-group">
+  <label for="observaciones">Observaciones</label>
+  <input id="observaciones" class="form-control" type="text" name="observaciones" value="{{ inventario.observaciones }}">
+</div>
+<div class='mb-3 mt-3'>
+<input class="btn btn-primary btn-sm" type="submit" value="Guardar">
+<a href="{% url 'clientes:home' %}" class='btn btn-sm btn-danger'>Cancelar</a>
+</div>
 </form>
