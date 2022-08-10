@@ -3,7 +3,7 @@ from django.views.generic import View
 from django.http import JsonResponse
 from .models import Clientes
 from general.models import Provincias, Localidades
-from datetime import *
+import datetime
 import pandas as pd
 
 # Create your views here.
@@ -74,9 +74,10 @@ def editar(request, id):
     cliente=Clientes.objects.get(id=id) 
     provincia=Provincias.objects.all() 
     
-    fecha=date.fromisoformat(str(cliente.fecha_alta))
+    fecha=cliente.fecha_alta
     #f=datetime.strftime(fecha, "%Y-%m-%d")
-
+    print(fecha)
+    print(cliente.fecha_alta)
     if request.method=="POST":
         cliente.cuil=request.POST.get('cuil')
         cliente.nombre=request.POST.get('nombre')
@@ -91,7 +92,7 @@ def editar(request, id):
     context = {
         'cliente':cliente,
         'provincia':provincia,
-        'fecha_alta':fecha,
+        'fecha_alta':datetime.datetime.strftime(fecha,"%Y-%m-%d")
     }
     return render(request, 'clientes/editar.html',context)  
 
