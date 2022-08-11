@@ -1,38 +1,44 @@
 {% extends 'layout.html' %}
 {% block titulo%}
-Inventario
+Proveedores
 {% endblock %}
 {% block contenido %}
     <div class='container'>
     <div class='card'>
         <div class='card-header text-center' style="background:mediumturquoise">
-        <p class="h2 mb-3">Listado de Inventario</p>
+        <p class="h2 mb-3">Listado de Proveedores</p>
         </div>
         <div class="card-body">
-        <a href="{% url 'inventario:crear' %} " class="btn btn-sm btn-primary mb-3 mt-3"><i class="fa-solid fa-file-circle-plus"></i> Crear Producto</a>
+        <a href="{% url 'proveedores:crear' %} " class="btn btn-sm btn-primary mb-3 mt-3"><i class="fa-solid fa-file-circle-plus"></i> Crear Proveedor</a>
     
-    <table id='inventario' class='table table-stripped table-sm'>
+    <table id='proveedor' class='table table-success table-striped table-sm table-borderer'>
         <thead class='table-dark'>
-            <th>Código</th>
-            <th>Detalle</th>
-            <th>Stock</th>
-            <th>Stock Mínimo</th>
-            <th>Ultima Compra</th>
+            <th>CUIT/CUIL</th>
+            <th>Nombre</th>
+            <th>Teléfono</th>
+            <th>Domicilio</th>
+            <th>Contacto</th>
+            <th>Email</th>
+            <th>Provincia</th>
+            <th>Localidad</th>
             <th>Observaciones</th>
             <th>Acciones</th>
         </thead>
         <tbody>
-            {% for i in inventario %}
+            {% for p in proveedores %}
             <tr>
-                <td>{{ i.codigo}}</td>
-                <td>{{ i.detalle}}</td>
-                <td>{{ i.stock}}</td>
-                <td>{{ i.stock_minimo}}</td>
-                <td>{{ i.ultima_compra}}</td>
-                <td>{{ i.observaciones}}</td>
+                <td>{{ p.cuit_cuil}}</td>
+                <td>{{ p.nombre }}</td>
+                <td>{{ p.telefono }}</td>
+                <td>{{ p.domicilio }}</td>
+                <td>{{ p.contacto }}</td>
+                <td>{{ p.email }}</td>
+                <td>{{ p.provincia }}</td>
+                <td>{{ p.localidad }}</td>
+                <td>{{ p.observaciones }}</td>
                 <td>
-                    <a href="editar/{{ i.id }}" class='btn btn-sm btn-success'><i class="fa-solid fa-pencil"></i> Editar</a>
-                    <a href="eliminar/{{ i.id }}" class='btn btn-sm btn-danger'><i class="fa-solid fa-trash-alt"></i> Eliminar</a>
+                    <a href="editar/{{ p.id }}" class='btn btn-sm btn-success'><i class="fa-solid fa-pencil"></i> Editar</a>
+                    <a href="eliminar/{{ p.id }}" class='btn btn-sm btn-danger'><i class="fa-solid fa-trash-alt"></i> Eliminar</a>
                 </td>
             </tr>
             {% endfor %}

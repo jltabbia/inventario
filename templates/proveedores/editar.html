@@ -1,18 +1,18 @@
 {% extends 'layout.html' %}
 {% block titulo %}
-    Editar Cliente
+    Editar Proveedor
 {% endblock %}
 {% block contenido %}
 <div class="container">
     <div class="card">
         <div class="card-header" style="background:darkkhaki;">
-            <p class="h3 mb-3 mt-3">Editar Cliente</p>
+            <p class="h3 mb-3 mt-3">Editar Proveedor</p>
         </div>
         <div class="card-body" style="background:bisque;">
-            <h4 class="card-title">Datos del Cliente</h4>
-            <input type='hidden' id='pro' value='{{ cliente.provincia }}'>
-            <input type='hidden' id='loc' value='{{ cliente.localidad }}'>
-            {% include "clientes/form.html" %}
+            <h4 class="card-title">Datos del Proveedor</h4>
+            <input type='hidden' id='pro' value='{{ proveedores.provincia }}'>
+            <input type='hidden' id='loc' value='{{ proveedores.localidad }}'>
+            {% include "proveedores/form.html" %}
         </div>
     </div>
 </div>
@@ -25,29 +25,29 @@ $(document).ready(function() {
     var l=loc.value;
    
     // var f1 = toDate(fa.value);
-    $("#prov option[value="+p+"]").attr("selected",true);
+    $("#provincia option[value="+p+"]").attr("selected",true);
 
     buscar(p,l);
-    
-    $("#prov").change(function(){
-        var p=$("#prov").val();
+
+    $("#provincia").change(function(){
+        var p=$("#provincia").val();
         buscar(p,l);
     });
 
     function buscar(p,l){
-        var url = '/clientes/ListaLocalidades/'+p;
+        var url = '/proveedores/ListaLocalidades/'+p;
         $.ajax({
             url: url,
             type: "get",
             dataType: "json",
             success: function(response) {
               console.log(response);
-              $("#loca").empty();
+              $("#localidad").empty();
               for (var key in response.localidades) {
                 var temp="<option value='"+response.localidades[key].codigo_localidad+"'>"+response.localidades[key].detalle+"</option>";
-                $("#loca").append(temp);
+                $("#localidad").append(temp);
               }
-              $("#loca option[value="+l+"]").attr("selected",true);
+              $("#localidad option[value="+l+"]").attr("selected",true);
             },
           });
       };
