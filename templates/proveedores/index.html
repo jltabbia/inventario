@@ -11,7 +11,7 @@ Proveedores
         <div class="card-body">
         <a href="{% url 'proveedores:crear' %} " class="btn btn-sm btn-primary mb-3 mt-3"><i class="fa-solid fa-file-circle-plus"></i> Crear Proveedor</a>
     
-    <table id='proveedor' class='table table-success table-striped table-sm table-borderer'>
+    <table id='proveedor' class='table table-success table-striped table-sm table-borderer' style="font-size: 14px;">
         <thead class='table-dark'>
             <th>CUIT/CUIL</th>
             <th>Nombre</th>
@@ -52,7 +52,7 @@ Proveedores
 {% block scripts %}
 <script>
 $(document).ready(function () {
-    $('#inventario').DataTable();
+    $('#proveedor').DataTable();
 });
 </script>
 {% endblock %}

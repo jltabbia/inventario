@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     'clientes',
     'proveedores',
     'general',
+    'rubros',
 ]
 
 MIDDLEWARE = [
@@ -71,7 +72,7 @@ WSGI_APPLICATION = 'sistema.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'inventario',
+        'NAME': 'stock',
         'HOST': 'localhost',
         'PORT': '3307',
         'USER': 'root',

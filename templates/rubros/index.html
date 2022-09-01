@@ -1,0 +1,44 @@
+{% extends 'layout.html' %}
+{% block titulo%}
+Rubros
+{% endblock %}
+{% block contenido %}
+    <div class='container'>
+    <div class='card'>
+        <div class='card-header text-center' style="background:mediumturquoise">
+        <p class="h2 mb-3">Listado de Rubros</p>
+        </div>
+        <div class="card-body">
+        <a href="{% url 'rubros:rubro' %} " class="btn btn-sm btn-primary mb-3 mt-3"><i class="fa-solid fa-file-circle-plus"></i> Crear Rubro</a>
+        <a href="{% url 'rubros:subrubro' %} " class="btn btn-sm btn-primary mb-3 mt-3"><i class="fa-solid fa-file-circle-plus"></i> Crear Sub-Rubro</a>
+    <table id='inventario' class='table table-stripped table-sm table-success' style="font-size: 14px;">
+        <thead class='table-dark'>
+            <th>Id</th>
+            <th>Detalle</th>
+            <th>Acciones</th>
+        </thead>
+        <tbody>
+            {% for r in rubros %}
+            <tr>
+                <td>{{ r.id}}</td>
+                <td>{{ r.detalle}}</td>
+                <td>
+                    <a href="editar/{{ r.id }}" class='btn btn-sm btn-success'><i class="fa-solid fa-pencil"></i> Editar</a>
+                    <a href="eliminar/{{ r.id }}" class='btn btn-sm btn-danger'><i class="fa-solid fa-trash-alt"></i> Eliminar</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+</div>
+    </div>
+
+{% endblock %}
+{% block scripts %}
+<script>
+$(document).ready(function () {
+    $('#inventario').DataTable();
+});
+</script>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends 'layout.html' %}
+{% block titulo %}Crear Rubro{% endblock %}
+{% block contenido %}
+<div class="container">
+    <div class="card">
+        <div class='card-header text-center' style="background:mediumturquoise">
+            <p class="h2 mb-3">Datos del Rubro</p>
+            </div>
+        <div class="card-body">            
+            <form method='POST' enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="detalle">Detalle</label>
+                    <input type="text" class="form-control-fixed" size="50px" name="detalle" id="detalle" placeholder="Detalle del rubro">
+                </div>
+                <button type='submit' class="btn btn-sm btn-primary mb-3 mt-3">Aceptar</button>
+                <a href='{% url "rubros:home" %}' class="btn btn-sm btn-danger mb-3 mt-3">Cancelar</a>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
