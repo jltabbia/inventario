@@ -1,2 +1,2 @@
 # inventario
-# Sistema de gtestión de inventario, ventas, bancos, clientes, proveedores, etc.-
+# Sistema de gestión de inventario, ventas, bancos, clientes, proveedores, etc.-
