@@ -14,7 +14,7 @@ class Provincias(models.Model):
         managed=True
     
 class Localidades(models.Model):
-    codigo_provincia=models.IntegerField(verbose_name='Código Provincia')
+    codigo_provincia=models.ForeignKey(Provincias, on_delete=models.CASCADE, verbose_name='Provincia')
     codigo_localidad=models.IntegerField(verbose_name='Código Localidad')
     nombre_localidad=models.CharField(max_length=100, verbose_name='Localidad')
     
@@ -29,16 +29,31 @@ class Localidades(models.Model):
         managed=True
         
 class Rubros(models.Model):
-    id_rubro=models.IntegerField(verbose_name="Id Rubro")
+    id=models.IntegerField(verbose_name="Id Rubro", primary_key=True)
     detalle=models.CharField(max_length=100, null=False, verbose_name="Detalle")
-    id_rubro_padre=models.IntegerField()
-    
+   
     def __str__ (self):
-       return '%s %s %s' % (self.id_rubro, self.detalle, self.id_rubro_padre)
+       return '%s %s' % (self.id, self.detalle)
     
     class Meta:
         db_table = 'rubros'
-        ordering = ["id_rubro","id_rubro_padre","detalle"]
+        ordering = ["id","detalle"]
         verbose_name_plural = "Rubros"
         verbose_name = 'Rubros'
         managed=True
+        
+class Subrubros(models.Model):
+    id=models.IntegerField(verbose_name="Id Sub-Rubro", primary_key=True)
+    id_rubro=models.ForeignKey(Rubros, on_delete=models.CASCADE, verbose_name='Rubros')
+    detalle=models.CharField(max_length=100, null=False, verbose_name="Detalle")
+   
+    def __str__ (self):
+       return '%s %s' % (self.id, self.id_rubro, self.detalle)
+    
+    class Meta:
+        db_table = 'subrubros'
+        ordering = ["id_rubro", "id", "detalle"]
+        verbose_name_plural = "SubRubros"
+        verbose_name = 'SubRubros'
+        managed=True
+        
